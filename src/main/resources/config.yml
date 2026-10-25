@@ -1,0 +1,75 @@
+# The HTTP endpoint only accepts requests carrying this secret as a Bearer token.
+# Change this value before exposing the port outside of the local machine.
+api-token: "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET"
+bind-address: "127.0.0.1"
+port: 8765
+
+# Dedicated port opened automatically by the plugin for OAuth login callbacks.
+# Open this port in your firewall/router and register its full callback URL in each developer center.
+# This is the shared player-specific platform-selection site. Set it to HTTPS when a reverse proxy terminates TLS.
+oauth-callback:
+  port: 8766
+  public-url: "http://apicallback.chorokstudio.net:8766"
+
+# Address placed in the clickable /api 대시보드 message. Set this to the address that
+# players can actually reach, for example: "http://203.0.113.10:8765/dashboard".
+# It is also required for /api 공식로그인 because the OAuth provider redirects to this server.
+# Leave empty only when the bind-address itself is a public address.
+dashboard-url: ""
+
+# 대시보드에 한 번에 표시할 최근 이벤트 수입니다. 값이 클수록 새로고침이 느려질 수 있습니다.
+dashboard:
+  event-limit: 50
+  # Dashboard event history is saved to event-history.json and survives restarts.
+  event-history-limit: 5000
+  # 대시보드 데이터를 이 시간만큼 메모리에 보관합니다. 750ms는 빠른 갱신과 서버 부담의 균형값입니다.
+  cache-millis: 750
+
+# /api/donation-test uses this amount when its request does not provide one.
+test-amount: 1000
+
+# Number of event IDs retained in memory to prevent duplicate execution from retrying relays.
+deduplication-cache-size: 5000
+
+# 한 후원 규칙에 명령어가 많아도 서버 틱이 한 번에 밀리지 않도록 나누어 실행합니다.
+# 명령어 순서와 후원 대기열 순서는 그대로 유지됩니다.
+donation:
+  max-commands-per-tick: 4
+
+# 대시보드와 API 요청을 처리하는 최대 작업 수입니다. 과도한 접속에도 새 스레드가 무한히 늘어나지 않습니다.
+api-worker-threads: 4
+
+# Unofficial CHZZK live-chat listener. A public, currently-live channel is connected automatically
+# after /api/login and again when the Minecraft server starts.
+chzzk:
+  auto-connect: true
+  poll-interval-seconds: 30
+  log-chat-events: false
+  # 치지직 스튜디오의 "테스트 알림 보내기"까지 실제 후원처럼 수신하려면
+  # 대시보드의 공식 API에서 앱 정보를 등록하고 플레이어 로그인을 진행하세요.
+  open-api:
+    # 앱 정보 등록 화면에서 값이 저장됩니다. 이 파일은 외부에 공유하지 마세요.
+    client-id: ""
+    client-secret: ""
+    # 공식 API 로그인 세션은 테스트용으로만 임시 연결됩니다.
+    test-only: true
+  party-donation:
+    # When true, a party donation event is delivered to every linked player of the same channel
+    # whose PARTY setting is enabled. When false, only the first linked player receives it.
+    share-with-linked-players: false
+
+# SOOP and CI.ME official API application credentials. They are saved from the dashboard's
+# 공식 API panel and must never be shared together with this config file.
+soop:
+  open-api:
+    client-id: ""
+    client-secret: ""
+cime:
+  open-api:
+    client-id: ""
+    client-secret: ""
+  # Official follower-list polling. The CI.ME app must request READ:CHANNEL,
+  # and the streamer whose followers should be received must log in via OAuth.
+  follow:
+    enabled: true
+    poll-interval-seconds: 60

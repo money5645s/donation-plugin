@@ -1,0 +1,13 @@
+{
+  "name": "chzzk-local-collector",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node collector.mjs"
+  },
+  "dependencies": {
+    "chzzk": "1.10.4"
+  }
+}
+

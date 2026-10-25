@@ -1,0 +1,38 @@
+{
+  "rules": [
+    {
+      "platformAmounts": {
+        "CHZZK": 10000,
+        "SOOP": 100,
+        "CIME": 10000
+      },
+      "durationMs": 0,
+      "commands": [
+        "say {player}님이 {amount} 단위 후원을 했습니다!",
+        "give {player} diamond 1"
+      ]
+    },
+    {
+      "platformAmounts": {
+        "CHZZK": 50000,
+        "SOOP": 500,
+        "CIME": 50000
+      },
+      "durationMs": 0,
+      "commands": [
+        "say {donor}님의 {amount} 단위 후원! {player}에게 특별 보상을 지급합니다.",
+        "give {player} netherite_ingot 1"
+      ]
+    }
+  ],
+  "eventRules": [
+    {
+      "type": "SUBSCRIPTION",
+      "commands": ["say {player}님이 구독 후원 이벤트를 받았습니다!"]
+    },
+    {
+      "type": "PARTY",
+      "commands": ["say {player}님이 파티 후원 이벤트를 받았습니다!"]
+    }
+  ]
+}

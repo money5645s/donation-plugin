@@ -1,0 +1,28 @@
+# Local IDE and Gradle files
+.gradle/
+.idea/
+**/.gradle/
+
+# Generated build output and packaged JARs
+build/
+**/build/
+*.jar
+
+# JavaScript dependencies and generated web artifacts
+**/node_modules/
+**/.next/
+**/dist/
+**/.wrangler/
+
+# Separate projects kept beside the Paper 26.2 plugin source
+dashboard/
+forge-1.20.1/
+mc-1.20.1/
+
+# Local runtime data and secrets
+event-history.json
+steamer.json
+bindings.json
+*.log
+.env
+.env.*
